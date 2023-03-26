@@ -20,3 +20,7 @@
 <button (click)="openDialog()" mat-fab color="primary">
     <mat-icon>add</mat-icon>
 </button>
+
+<app-player-card [class.activePlayer]="this.game.currentPlayer === i"
+    *ngFor="let player of this.game.players; let i = index " [name]="player" [ngStyle]="{'top.px': i*75 + 25}"
+    [img]="this.game.player_images[i]"></app-player-card>

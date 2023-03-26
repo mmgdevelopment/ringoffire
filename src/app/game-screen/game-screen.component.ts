@@ -33,6 +33,8 @@ export class GameScreenComponent implements OnInit {
         this.mousehovered = false;
         this.gameStarted = true;
         this.game.playedCards.push(this.game.currentCard);
+        this.game.currentPlayer = (this.game.currentPlayer + 1) % this.game.players.length
+        this.showRules();
       }, 1500)
     }
   }
@@ -52,6 +54,15 @@ export class GameScreenComponent implements OnInit {
     });
   }
 
+
+  showRules() {
+    this.title = this.game.gameRules[this.getCurrentCardNumber()].title;
+    this.description = this.game.gameRules[this.getCurrentCardNumber()].description;
+  }
+
+  getCurrentCardNumber() {
+    return this.game.currentCard.split('_')[1];
+  }
 
 
 
