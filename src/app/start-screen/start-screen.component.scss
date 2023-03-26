@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(227, 9, 31)
+}
+
+.box {
+    width: auto;
+    height: 80vh;
+    max-width: 100%;
+    padding-top: 45px;
+}
+
+.label {
+    position: absolute;
+    width: 20vw;
+    bottom: 30vh;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.4);
+    }
+}

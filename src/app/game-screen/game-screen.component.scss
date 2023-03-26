@@ -1,0 +1,64 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    background: url('./../../assets/img/background.jpg');
+    background-size: cover;
+
+    img {
+        width: 150px;
+        height: 250px;
+        position: absolute;
+        right: 650px;
+        bottom: 150px;
+        transition: all ease-in-out 256ms;
+    }
+}
+
+.scaleCard {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.animateCard {
+    @extend .scaleCard;
+    transition: all ease-in-out 256ms;
+    animation: throwCard 2s ease forwards;
+}
+
+.minimizeCard {
+    transition: all 0ms !important;
+}
+
+.playedCard {
+    right: 1250px !important;
+    bottom: 600px !important;
+    transform: scale(1) rotate(-10deg);
+
+}
+
+@keyframes throwCard {
+
+    65% {
+        right: 1250px;
+        bottom: 600px;
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        right: 1250px;
+        bottom: 600px;
+        transform: scale(1) rotate(-10deg);
+    }
+
+}
+
+button {
+    position: absolute;
+    right: 65px;
+    bottom: 65px;
+}
