@@ -1,26 +1,46 @@
 <div class="container">
+  <!-- Card Stack-->
+  <img
+    *ngFor="let card of [1, 2, 3, 4, 5]; index as i"
+    [ngStyle]="{ 'right.px': i * 10 + 600 }"
+    src="./../../assets/img/cards/card_cover.png"
+  />
 
-    <!-- Card Stack-->
-    <img *ngFor="let card of [1,2,3,4,5]; index as i" [ngStyle]="{'right.px': i*10 + 600}"
-        src="./../../assets/img/cards/card_cover.png">
-
-    <!-- Cover animated while hover-->
-    <img (click)="takeCard()" [class.minimizeCard]="cardTaken" [class.scaleCard]="mousehovered && !cardTaken"
-        (mouseover)="mousehovered=true" (mousemove)="mousehovered=true" (mouseout)="mousehovered=false"
-        src="./../../assets/img/cards/card_cover.png">
-    <!-- Game Card played-->
-    <img class="playedCard" *ngIf="gameStarted"
-        src="./../../assets/img/cards/{{ game.playedCards[game.playedCards.length -1] }}.png">
-    <!-- Game Card shown after clicking the cover-->
-    <img class="animateCard" *ngIf="cardTaken" src="./../../assets/img/cards/{{ game.currentCard }}.png">
-
+  <!-- Cover animated while hover-->
+  <img
+    (click)="takeCard()"
+    [class.minimizeCard]="cardTaken"
+    [class.scaleCard]="mousehovered && !cardTaken"
+    (mouseover)="mousehovered = true"
+    (mousemove)="mousehovered = true"
+    (mouseout)="mousehovered = false"
+    src="./../../assets/img/cards/card_cover.png"
+  />
+  <!-- Game Card played-->
+  <img
+    class="playedCard"
+    *ngIf="gameStarted"
+    src="./../../assets/img/cards/{{
+      game.playedCards[game.playedCards.length - 1]
+    }}.png"
+  />
+  <!-- Game Card shown after clicking the cover-->
+  <img
+    class="animateCard"
+    *ngIf="cardTaken"
+    src="./../../assets/img/cards/{{ game.currentCard }}.png"
+  />
 </div>
 <app-dialog-card [title]="title" [description]="description"></app-dialog-card>
 
 <button (click)="openDialog()" mat-fab color="primary">
-    <mat-icon>add</mat-icon>
+  <mat-icon>add</mat-icon>
 </button>
 
-<app-player-card [class.activePlayer]="this.game.currentPlayer === i"
-    *ngFor="let player of this.game.players; let i = index " [name]="player" [ngStyle]="{'top.px': i*75 + 25}"
-    [img]="this.game.player_images[i]"></app-player-card>
+<app-player-card
+  [class.activePlayer]="this.game.currentPlayer === i"
+  *ngFor="let player of this.game.players; let i = index"
+  [name]="player"
+  [ngStyle]="{ 'top.px': i * 75 + 25 }"
+  [img]="this.game.player_images[i]"
+></app-player-card>
