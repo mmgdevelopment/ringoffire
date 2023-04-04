@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../database.service';
 
 @Component({
 	selector: 'app-start-screen',
@@ -7,9 +8,10 @@ import { Router } from '@angular/router';
 	styleUrls: ['./start-screen.component.scss'],
 })
 export class StartScreenComponent {
-	constructor(private router: Router) {}
+	constructor(private router: Router, private database: DatabaseService) {}
 
 	startGame(): void {
 		this.router.navigateByUrl('game');
+		this.database.createGame();
 	}
 }
