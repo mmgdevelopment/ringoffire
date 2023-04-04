@@ -17,6 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PlayerCardComponent } from './player-card/player-card.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -44,7 +47,9 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    A11yModule
+    A11yModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
