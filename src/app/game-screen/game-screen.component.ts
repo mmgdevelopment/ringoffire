@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Game } from 'src/models/game';
 import { AddPlayerComponent } from '../add-player/add-player.component';
+import { DatabaseService } from '../database.service';
 
 @Component({
 	selector: 'app-game-screen',
@@ -10,37 +11,32 @@ import { AddPlayerComponent } from '../add-player/add-player.component';
 })
 export class GameScreenComponent implements OnInit {
 	mousehovered = false;
-	cardTaken = false;
-	gameStarted = false;
-	game: Game = new Game();
+	game = new Game();
 
-	title = 'Take a Card';
-	description = 'Click on the Card stack and take your first Card';
-
-	constructor(public dialog: MatDialog) {}
+	constructor(public dialog: MatDialog, private database: DatabaseService) {}
 
 	ngOnInit() {
-		// this.newGame();
+		this.database.setChangeListener(this.database.getIdFromURL());
+		this.database.game$.subscribe((gameFromDatabase) => {
+			this.game.update(gameFromDatabase);
+		});
 	}
 
 	takeCard() {
-		if (!this.cardTaken) {
-			this.cardTaken = true;
+		if (!this.game.cardAnimation) {
+			this.game.cardAnimation = true;
 			this.game.currentCard = this.game?.stack.pop();
 			setTimeout(() => {
-				this.cardTaken = false;
+				this.game.cardAnimation = false;
 				this.mousehovered = false;
-				this.gameStarted = true;
 				this.game.playedCards.push(this.game.currentCard);
 				this.game.currentPlayer =
 					(this.game.currentPlayer + 1) % this.game.players.length;
-				this.showRules();
+				this.game.showRules();
+				this.database.updateGame(this.game);
 			}, 1500);
+			this.database.updateGame(this.game);
 		}
-	}
-
-	newGame() {
-		this.game = new Game();
 	}
 
 	openDialog(): void {
@@ -52,15 +48,5 @@ export class GameScreenComponent implements OnInit {
 				this.game.player_images.push('1.webp');
 			}
 		});
-	}
-
-	showRules() {
-		this.title = this.game.gameRules[this.getCurrentCardNumber()].title;
-		this.description =
-			this.game.gameRules[this.getCurrentCardNumber()].description;
-	}
-
-	getCurrentCardNumber() {
-		return this.game.currentCard.split('_')[1];
 	}
 }
