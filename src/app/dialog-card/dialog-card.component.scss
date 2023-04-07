@@ -1,9 +1,13 @@
 :host {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    right: 50%;
-    transform: translateX(-50%);
-    width: 60%;
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	right: 50%;
+	transform: translateX(-50%);
+	width: 60%;
 
+	@media (max-width: 500px) {
+		bottom: 0px;
+		width: 100%;
+	}
 }

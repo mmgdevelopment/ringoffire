@@ -1,11 +1,11 @@
 <div class="container">
 	<!-- Card Stack-->
+
 	<img
 		*ngFor="let card of [1, 2, 3, 4, 5]; index as i"
-		[ngStyle]="{ 'right.px': i * 10 + 600 }"
+		[ngStyle]="{ right: 'calc((35vw - 40px ) + ' + i * 10 + 'px)' }"
 		src="./../../assets/img/cards/card_cover.png"
 	/>
-
 	<!-- Cover animated while hover-->
 	<img
 		(click)="takeCard()"
@@ -44,6 +44,6 @@
 	[class.activePlayer]="this.game.currentPlayer === i"
 	*ngFor="let player of this.game.players; let i = index"
 	[name]="player"
-	[ngStyle]="{ 'top.px': i * 75 + 25 }"
+	[ngStyle]="{ 'top.px': i * 50 + 15 }"
 	[img]="this.game.player_images[i]"
 ></app-player-card>

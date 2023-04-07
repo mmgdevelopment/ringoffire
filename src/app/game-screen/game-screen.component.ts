@@ -46,6 +46,7 @@ export class GameScreenComponent implements OnInit {
 			if (name && name.length > 0) {
 				this.game.players.push(name);
 				this.game.player_images.push('1.webp');
+				this.database.updateGame(this.game);
 			}
 		});
 	}

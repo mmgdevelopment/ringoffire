@@ -1,76 +1,134 @@
 .container {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100%;
-    background: url('./../../assets/img/background.jpg');
-    background-size: cover;
+	width: 100vw;
+	height: 100vh;
+	max-width: 100%;
+	background: url("./../../assets/img/background.jpg");
+	background-size: cover;
 
-    img {
-        width: 150px;
-        height: 250px;
-        position: absolute;
-        right: 650px;
-        bottom: 150px;
-        transition: all ease-in-out 256ms;
-    }
+	img {
+		width: 150px;
+		height: 250px;
+		position: absolute;
+		right: 35vw;
+		bottom: 200px;
+		transition: all ease-in-out 256ms;
+
+		@media (max-width: 500px) {
+			width: 125px;
+			height: 175px;
+		}
+	}
 }
 
 .scaleCard {
-    transform: scale(1.2);
-    cursor: pointer;
+	transform: scale(1.2);
+	cursor: pointer;
 }
 
 .animateCard {
-    @extend .scaleCard;
-    transition: all ease-in-out 256ms;
-    animation: throwCard 2s ease forwards;
+	@extend .scaleCard;
+	transition: all ease-in-out 256ms;
+	animation: throwCardMAX 2s ease forwards;
+
+	@media (max-width: 1250px), (max-height: 750px) {
+		animation: throwCardMIN 2s ease forwards;
+	}
+	@media (max-width: 850px) {
+		animation: throwCardSMART 2s ease forwards;
+	}
 }
 
 .minimizeCard {
-    transition: all 0ms !important;
+	transition: all 0ms !important;
 }
 
 .playedCard {
-    right: 1250px !important;
-    bottom: 600px !important;
-    transform: scale(1) rotate(-10deg);
+	right: 1050px !important;
+	bottom: 450px !important;
+	transform: scale(1) rotate(-10deg);
 
+	@media (max-width: 1250px), (max-height: 750px) {
+		right: 650px !important;
+		bottom: 450px !important;
+	}
+	@media (max-width: 850px) {
+		right: 40vw !important;
+		bottom: 60vh !important;
+	}
 }
 
-@keyframes throwCard {
+@keyframes throwCardMAX {
+	65% {
+		right: 1050px;
+		bottom: 450px;
+		transform: scale(1.1) rotate(5deg);
+	}
 
-    65% {
-        right: 1250px;
-        bottom: 600px;
-        transform: scale(1.1) rotate(5deg);
-    }
+	80% {
+		transform: rotate(-10deg);
+	}
 
-    80% {
-        transform: rotate(-10deg);
-    }
+	100% {
+		right: 1050px;
+		bottom: 450px;
+		transform: scale(1) rotate(-10deg);
+	}
+}
 
-    100% {
-        right: 1250px;
-        bottom: 600px;
-        transform: scale(1) rotate(-10deg);
-    }
+@keyframes throwCardMIN {
+	65% {
+		right: 650px;
+		bottom: 450px;
+		transform: scale(1.1) rotate(5deg);
+	}
 
+	80% {
+		transform: rotate(-10deg);
+	}
+
+	100% {
+		right: 650px;
+		bottom: 450px;
+		transform: scale(1) rotate(-10deg);
+	}
+}
+@keyframes throwCardSMART {
+	65% {
+		right: 40vw;
+		bottom: 60vh;
+		transform: scale(1.1) rotate(5deg);
+	}
+
+	80% {
+		transform: rotate(-10deg);
+	}
+
+	100% {
+		right: 40vw;
+		bottom: 60vh;
+		transform: scale(1) rotate(-10deg);
+	}
 }
 
 button {
-    position: absolute;
-    right: 65px;
-    bottom: 65px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: black;
+	position: absolute;
+	right: 65px;
+	bottom: 65px;
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
 
-    &:hover {
-        transform: translate3d(-5px, -5px, 5px);
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
-    }
+	&:hover {
+		transform: translate3d(-5px, -5px, 5px);
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+	}
+
+	@media (max-width: 500px) {
+		right: 15px;
+		bottom: 125px;
+	}
 }
 
 .activePlayer {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
 }
