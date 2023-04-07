@@ -13,7 +13,6 @@ export class StartScreenComponent {
 	startGame() {
 		this.database.createGame();
 		this.database.id$.subscribe((id: string) => {
-			this.database.id = id;
 			this.database.setChangeListener(id);
 			this.router.navigateByUrl('/game/' + id);
 		});

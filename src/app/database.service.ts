@@ -12,7 +12,7 @@ import { Game } from 'src/models/game';
 })
 export class DatabaseService {
 	public id$ = new Subject();
-	public id = '';
+	// public id = '';
 	public game$ = new Observable();
 	private collectioRef: AngularFirestoreCollection;
 	private dbPath = 'games';
