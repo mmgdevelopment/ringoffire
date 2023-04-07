@@ -3,8 +3,11 @@ export class Game {
 	public player_images: string[] = [];
 	public stack: string[] = [];
 	public playedCards: string[] = [];
+	public cardAnimation = false;
 	public currentPlayer = 0;
 	public currentCard = '';
+	public currentTitle = 'Take a Card';
+	public currenDescription = 'Click on the Card stack and take your first Card';
 
 	public gameRules = [
 		{
@@ -49,6 +52,31 @@ export class Game {
 		},
 	];
 
+	toJSON() {
+		return {
+			players: this.players,
+			player_images: this.player_images,
+			stack: this.stack,
+			playedCards: this.playedCards,
+			currentPlayer: this.currentPlayer,
+			currentCard: this.currentCard,
+			cardAnimation: this.cardAnimation,
+			currentTitle: this.currentTitle,
+			currenDescription: this.currenDescription,
+		};
+	}
+
+	update(data) {
+		this.players = data.players;
+		this.player_images = data.player_images;
+		this.stack = data.stack;
+		this.playedCards = data.playedCards;
+		this.currentPlayer = data.currentPlayer;
+		this.currentCard = data.currentCard;
+		this.cardAnimation = data.cardAnimation;
+		this.currentTitle = data.currentTitle;
+		this.currenDescription = data.currenDescription;
+	}
 	constructor() {
 		for (let i = 1; i < 14; i++) {
 			this.stack.push('spade_' + i);
@@ -56,8 +84,17 @@ export class Game {
 			this.stack.push('clubs_' + i);
 			this.stack.push('diamonds_' + i);
 		}
-
 		shuffle(this.stack);
+	}
+
+	getCurrentCardNumber() {
+		return this.currentCard.split('_')[1];
+	}
+
+	showRules() {
+		this.currentTitle = this.gameRules[this.getCurrentCardNumber()].title;
+		this.currenDescription =
+			this.gameRules[this.getCurrentCardNumber()].description;
 	}
 }
 

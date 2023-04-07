@@ -1,57 +1,50 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StartScreenComponent } from './start-screen/start-screen.component';
-import { GameScreenComponent } from './game-screen/game-screen.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-import { DialogCardComponent } from './dialog-card/dialog-card.component';
 import { MatButtonModule } from '@angular/material/button';
-import { AddPlayerComponent } from './add-player/add-player.component';
-import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PlayerCardComponent } from './player-card/player-card.component';
-import { A11yModule } from '@angular/cdk/a11y';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-
-
-
-
-
-
+import { AddPlayerComponent } from './add-player/add-player.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { DialogCardComponent } from './dialog-card/dialog-card.component';
+import { GameScreenComponent } from './game-screen/game-screen.component';
+import { PlayerCardComponent } from './player-card/player-card.component';
+import { StartScreenComponent } from './start-screen/start-screen.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    StartScreenComponent,
-    GameScreenComponent,
-    DialogCardComponent,
-    AddPlayerComponent,
-    PlayerCardComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    A11yModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore())
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		StartScreenComponent,
+		GameScreenComponent,
+		DialogCardComponent,
+		AddPlayerComponent,
+		PlayerCardComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		MatCardModule,
+		MatButtonModule,
+		MatIconModule,
+		MatDialogModule,
+		MatFormFieldModule,
+		FormsModule,
+		MatInputModule,
+		A11yModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule, // for firestore,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

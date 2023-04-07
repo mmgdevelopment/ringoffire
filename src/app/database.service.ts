@@ -1,27 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+	AngularFirestore,
+	AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { Game } from 'src/models/game';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class DatabaseService {
-	constructor(private firestore: Firestore) {}
-
-	private collectioRef = collection(this.firestore, 'games');
-	private game = new Game();
-	private ID: string;
+	public id$ = new Subject();
+	public id = '';
+	public game$ = new Observable();
+	private collectioRef: AngularFirestoreCollection;
+	private dbPath = 'games';
+	constructor(private db: AngularFirestore, private router: Router) {
+		this.collectioRef = db.collection(this.dbPath);
+	}
 
 	createGame() {
-		const gameData = JSON.parse(JSON.stringify(this.game));
-		addDoc(this.collectioRef, { game: gameData })
+		const game = new Game();
+		this.collectioRef
+			.add(game.toJSON())
 			.then((gameInfo) => {
-				this.ID = gameInfo.id;
-				console.log('Sucessfully created new Game', gameInfo, this.ID);
+				this.id$.next(gameInfo.id);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	}
+
+	updateGame(game: Game) {
+		this.collectioRef.doc(this.getIdFromURL()).update(this.toJSON(game));
+	}
+
+	setChangeListener(id: string) {
+		this.game$ = this.collectioRef.doc(id).valueChanges();
+	}
+
+	toJSON(object: Game): JSON {
+		return JSON.parse(JSON.stringify(object));
+	}
+	getIdFromURL() {
+		return this.router.url.split('/game/')[1];
 	}
 }

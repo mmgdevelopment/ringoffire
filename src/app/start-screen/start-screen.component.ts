@@ -10,8 +10,12 @@ import { DatabaseService } from '../database.service';
 export class StartScreenComponent {
 	constructor(private router: Router, private database: DatabaseService) {}
 
-	startGame(): void {
-		this.router.navigateByUrl('game');
+	startGame() {
 		this.database.createGame();
+		this.database.id$.subscribe((id: string) => {
+			this.database.id = id;
+			this.database.setChangeListener(id);
+			this.router.navigateByUrl('/game/' + id);
+		});
 	}
 }
